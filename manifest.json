@@ -15,12 +15,12 @@
       "type": "image/jpeg"
     }
   ],
-  "start_url": "https://sinhala-wala-katha.github.io/sinhala-wal-katha/",
+  "start_url": "https://sinhala-wala-katha.github.io/",
   "display": "standalone",
   "theme_color": "#d32f2f",
   "background_color": "#ffffff",
   "orientation": "portrait",
-  "scope": "https://sinhala-wala-katha.github.io/sinhala-wal-katha/",
+  "scope": "https://sinhala-wala-katha.github.io/",
   "lang": "si",
   "dir": "ltr"
 }

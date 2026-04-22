@@ -19,7 +19,6 @@ lsi: true  # Latent Semantic Indexing (සම්බන්ධිත Keywords හ�
 encoding: "utf-8"
 
 # 🔍 ADVANCED SEO PLUGINS (GitHub Pages Authorized)
-# අපි Gemfile එකේ ඇතුළත් කළ සියලුම Plugins මෙහි සක්‍රීය කර ඇත.
 plugins:
   - jekyll-seo-tag        # Google Meta Tags ස්වයංක්‍රීයව සැකසීමට
   - jekyll-sitemap        # Sitemap.xml ස්වයංක්‍රීයව සැකසීමට
@@ -28,7 +27,6 @@ plugins:
   - jekyll-redirect-from  # පරණ ලින්ක් අලුත් ඒවාට හරවා යැවීමට
 
 # 🛡️ SEARCH ENGINE ACCESS CONTROL (Exclusions)
-# Google එකට පෙන්වීමට අනවශ්‍ය Technical ෆයිල් මෙහි අඩංගුයි.
 exclude:
   - Gemfile
   - Gemfile.lock

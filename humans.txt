@@ -1,0 +1,21 @@
+/* TEAM */
+Site Owner: Sinhala Wala Katha
+Contact: walkatha.com@gmail.com
+GitHub: https://github.com/Sinhala-wala-katha
+Location: Sri Lanka
+
+/* THANKS */
+Platform: GitHub Pages
+Hosting: Free - github.io
+
+/* SITE */
+Site Name: Sinhala Wala Katha - සිංහල වල් කතා 2026
+Site URL: https://sinhala-wala-katha.github.io/
+Keywords: sinhala wala katha, wal katha, wala katha 2026, sinhala wal katha, amma katha, lankan stories, සිංහල වල් කතා
+Description: The largest collection of Sinhala Wala Katha and Amma Katha stories. Daily updates for Sri Lankans worldwide.
+Language: Sinhala (si) / English (en)
+Audience: Sri Lanka and worldwide
+Last update: 2026-04-23
+Launch date: 2026-04-20
+Standards: HTML5, CSS3, JSON
+Software: GitHub Pages, GitHub Actions

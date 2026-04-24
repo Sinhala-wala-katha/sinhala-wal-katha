@@ -11,16 +11,12 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="language" content="Sinhala">
     <meta name="revisit-after" content="1 days">
-    <meta name="rating" content="general">
     <link rel="canonical" href="https://sinhala-wala-katha.github.io/">
-
     <meta name="google-site-verification" content="e91a7f05558ef324" />
-
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     <link rel="apple-touch-icon" href="logo.jpg">
     <meta name="theme-color" content="#d32f2f">
-    <link rel="preconnect" href="https://acceptable.a-ads.com">
 
     <!-- Open Graph -->
     <meta property="og:locale" content="si_LK">
@@ -40,6 +36,7 @@
     <meta name="twitter:description" content="ශ්‍රී ලංකාවේ විශාලතම Sinhala Wala Katha එකතුව. දිනපතා අලුත් වන කතා නොමිලේ කියවන්න.">
     <meta name="twitter:image" content="https://sinhala-wala-katha.github.io/logo.jpg">
 
+    <!-- Schema.org -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -66,33 +63,65 @@
     }
     </script>
 
+    <!-- FAQ Schema — Google Featured Snippet -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Sinhala Wala Katha කියවන්නේ කොහෙන්ද?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "හොඳම Sinhala Wala Katha sinhala-wala-katha.github.io වෙබ් අඩවියෙන් නොමිලේ කියවිය හැකිය. දිනපතා අලුත් Wala Katha, Amma Katha සහ Romantic Katha update වේ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Best Sinhala Wala Katha site එක කුමක්ද?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "sinhala-wala-katha.github.io ශ්‍රී ලංකාවේ විශාලතම සහ හොඳම Sinhala Wala Katha platform එකයි. Mobile friendly, fast loading සහ daily updates සහිතව ලොව පුරා ප්‍රවේශ විය හැකිය."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Sinhala Amma Katha online කියවිය හැකිද?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ඔව්! sinhala-wala-katha.github.io හි Sinhala Amma Katha, Wala Katha සහ Romantic Katha සියල්ල නොමිලේ online කියවිය හැකිය."
+          }
+        }
+      ]
+    }
+    </script>
+
     <style>
         :root {
             --primary: #e53935;
             --primary-dark: #b71c1c;
             --bg: #000000;
             --card: #111111;
+            --card2: #0d0d0d;
             --border: #2a2a2a;
             --text: #f0f0f0;
             --muted: #888888;
+            --accent: #ff6f60;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            line-height: 1.6;
+            line-height: 1.7;
             background: var(--bg);
             color: var(--text);
-            text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             overflow-x: hidden;
             -webkit-user-select: none;
             -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
         }
 
@@ -109,71 +138,99 @@
             position: absolute;
             bottom: -10px;
             border-radius: 50%;
-            background: rgba(229,57,53,0.1);
+            background: rgba(229,57,53,0.08);
             animation: floatUp linear infinite;
         }
         @keyframes floatUp {
-            0%   { transform: translateY(0) scale(1); opacity: 0.5; }
+            0%   { transform: translateY(0) scale(1); opacity: 0.4; }
             100% { transform: translateY(-100vh) scale(0); opacity: 0; }
         }
 
         /* ===== NAVBAR ===== */
         .navbar {
-            background: #0a0a0a;
+            position: sticky;
+            top: 0;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: var(--text);
-            padding: 16px 20px;
+            padding: 14px 20px;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 18px;
             border-bottom: 2px solid var(--primary);
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 1px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
             opacity: 0;
-            animation: fadeDown 0.8s ease 0.2s forwards;
-            z-index: 1;
+            animation: fadeDown 0.6s ease 0.1s forwards;
+        }
+        .navbar-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
         }
         @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(-8px); }
             to   { opacity: 1; transform: translateY(0); }
         }
         .navbar::after {
             content: '';
             position: absolute;
             top: 0; left: -100%;
-            width: 50%;
+            width: 40%;
             height: 100%;
-            background: rgba(229,57,53,0.08);
+            background: rgba(229,57,53,0.06);
             transform: skewX(-20deg);
-            animation: navShine 4s infinite;
+            animation: navShine 5s infinite;
         }
         @keyframes navShine {
             0%   { left: -100%; }
             100% { left: 250%; }
         }
 
-        /* ===== HERO ===== */
-        .hero {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 50px 20px 40px;
+        /* ===== LAYOUT ===== */
+        .page-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px;
             position: relative;
             z-index: 1;
         }
 
-        /* ===== H1 TYPEWRITER ===== */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 24px;
+            padding: 24px 0;
+        }
+        @media (max-width: 768px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 40px 20px 30px;
+            position: relative;
+            z-index: 1;
+        }
+
         .hero h1 {
-            font-size: clamp(20px, 5vw, 30px);
+            font-size: clamp(22px, 4.5vw, 34px);
             color: var(--primary);
             display: inline-block;
             overflow: hidden;
             white-space: nowrap;
             border-right: 3px solid var(--primary);
             width: 0;
-            text-shadow: 0 0 20px rgba(229,57,53,0.35);
-            animation: typingH1 2.5s steps(40) 0.5s forwards, blinkH1 0.7s step-end infinite;
+            text-shadow: 0 0 25px rgba(229,57,53,0.4);
+            animation: typingH1 2.8s steps(45) 0.3s forwards, blinkH1 0.7s step-end infinite;
         }
         .hero h1.done {
             border-right: 3px solid transparent;
@@ -183,35 +240,37 @@
         @keyframes typingH1 { from { width: 0; } to { width: 100%; } }
         @keyframes blinkH1  { 50% { border-color: transparent; } }
 
-        /* ===== SUBTITLE ===== */
-        .hero p.subtitle {
+        .hero-sub {
             color: var(--muted);
             font-size: 16px;
-            margin-top: 12px;
+            margin-top: 14px;
             opacity: 0;
-            animation: fadeUp 0.8s ease 3s forwards;
+            animation: fadeUp 0.8s ease 3.2s forwards;
+        }
+
+        /* ===== MAIN CARD ===== */
+        .main-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            opacity: 0;
+            animation: fadeUp 0.8s ease 3.4s forwards;
         }
 
         /* ===== INFO BOX ===== */
         .info-box {
-            max-width: 580px;
-            width: 90%;
-            margin: 28px auto;
-            padding: 20px 24px;
-            background: var(--card);
-            border-radius: 12px;
+            background: var(--card2);
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            padding: 18px 20px;
             font-size: 16px;
             color: #cccccc;
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--primary);
-            opacity: 0;
-            transform: translateY(15px);
-            animation: fadeUp 0.8s ease 3.2s forwards;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            text-align: left;
+            margin-bottom: 24px;
             min-height: 60px;
+            text-align: left;
         }
-
         .type-cursor {
             display: inline-block;
             width: 2px;
@@ -219,106 +278,276 @@
             background: var(--primary);
             margin-left: 2px;
             vertical-align: text-bottom;
-            animation: blinkCursor 0.7s step-end infinite;
+            animation: blinkC 0.7s step-end infinite;
         }
         .type-cursor.hide { display: none; }
-        @keyframes blinkCursor { 50% { opacity: 0; } }
+        @keyframes blinkC { 50% { opacity: 0; } }
+
+        /* ===== FEATURES GRID ===== */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .feature-item {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+        .feature-item:nth-child(1) { animation-delay: 3.6s; }
+        .feature-item:nth-child(2) { animation-delay: 3.7s; }
+        .feature-item:nth-child(3) { animation-delay: 3.8s; }
+        .feature-item:nth-child(4) { animation-delay: 3.9s; }
+        .feature-item:nth-child(5) { animation-delay: 4.0s; }
+        .feature-item:nth-child(6) { animation-delay: 4.1s; }
+        .feature-icon {
+            font-size: 26px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .feature-item:hover {
+            border-color: var(--primary);
+            color: var(--text);
+            transform: translateY(-3px);
+            transition: 0.2s;
+        }
 
         /* ===== BUTTON ===== */
         .btn-wrap {
+            text-align: center;
             opacity: 0;
-            animation: popIn 0.7s cubic-bezier(0.175,0.885,0.32,1.275) 3.8s forwards;
+            animation: popIn 0.7s cubic-bezier(0.175,0.885,0.32,1.275) 4.2s forwards;
         }
         @keyframes popIn {
             0%   { opacity: 0; transform: scale(0.5); }
-            60%  { opacity: 1; transform: scale(1.1); }
+            60%  { opacity: 1; transform: scale(1.08); }
             80%  { transform: scale(0.97); }
             100% { opacity: 1; transform: scale(1); }
         }
-
         .main-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: #ffffff;
-            padding: 16px 38px;
+            padding: 16px 42px;
             text-decoration: none;
             border-radius: 50px;
             font-size: 20px;
             font-weight: bold;
             position: relative;
             overflow: hidden;
-            transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
         }
         .main-btn.pulse {
             animation: glow 2s ease-in-out infinite;
         }
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(229,57,53,0.3), 0 0 20px rgba(229,57,53,0.1); }
-            50%       { box-shadow: 0 0 22px rgba(229,57,53,0.7), 0 0 45px rgba(229,57,53,0.3); }
+            0%,100% { box-shadow: 0 0 12px rgba(229,57,53,0.4); }
+            50%      { box-shadow: 0 0 28px rgba(229,57,53,0.8), 0 0 50px rgba(229,57,53,0.3); }
         }
-        .main-btn .btn-arrow {
+        .btn-arrow {
             display: inline-block;
             animation: arrowBounce 1s ease-in-out infinite;
         }
         @keyframes arrowBounce {
-            0%, 100% { transform: translateX(0); }
-            50%       { transform: translateX(6px); }
+            0%,100% { transform: translateX(0); }
+            50%      { transform: translateX(7px); }
         }
         .main-btn .ripple {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.3);
             transform: scale(0);
             animation: rippleAnim 0.55s linear;
             pointer-events: none;
         }
         @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
-        .main-btn:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-        .main-btn:active {
-            transform: scale(0.93) !important;
-            animation: clickPop 0.3s ease forwards, glow 2s ease-in-out infinite !important;
-        }
-        @keyframes clickPop {
-            0%   { transform: scale(1); }
-            30%  { transform: scale(0.88); }
-            65%  { transform: scale(1.08); }
-            100% { transform: scale(1); }
+        .main-btn:hover { transform: scale(1.05); }
+        .main-btn:active { transform: scale(0.93) !important; }
+
+        /* ===== NATIVE AD WRAP ===== */
+        .native-ad-wrap {
+            margin: 24px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeUp 1s ease 4.5s forwards;
         }
 
-        /* ===== AD ===== */
-        .ad-wrap {
-            width: 100%;
-            margin: 8px auto;
+        /* ===== FAQ SECTION ===== */
+        .faq-section {
+            margin-top: 28px;
             opacity: 0;
-            animation: fadeUp 1s ease 0.6s forwards;
+            animation: fadeUp 0.8s ease 4.6s forwards;
+        }
+        .faq-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .faq-item {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .faq-q {
+            padding: 14px 18px;
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .faq-q:hover { background: rgba(229,57,53,0.08); }
+        .faq-q .faq-icon {
+            color: var(--primary);
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+        .faq-q.open .faq-icon { transform: rotate(45deg); }
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s;
+            font-size: 14px;
+            color: #bbbbbb;
+            padding: 0 18px;
+        }
+        .faq-a.open {
+            max-height: 200px;
+            padding: 0 18px 14px;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
             position: relative;
             z-index: 1;
+        }
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            opacity: 0;
+            animation: fadeUp 0.8s ease 3.8s forwards;
+        }
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+        .tag {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: default;
+            transition: 0.2s;
+        }
+        .tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .stats-list {
+            list-style: none;
+        }
+        .stats-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+        }
+        .stats-list li:last-child { border: none; }
+        .stats-list span.val {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* ===== TOP BANNER AD ===== */
+        .top-banner-ad {
+            background: var(--card2);
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeDown 0.8s ease 0.5s forwards;
+        }
+
+        /* ===== BOTTOM AD ===== */
+        .bottom-ad-wrap {
+            text-align: center;
+            padding: 16px 0;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeUp 1s ease 5s forwards;
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            padding: 20px;
+            background: #0a0a0a;
+            border-top: 1px solid var(--border);
+            padding: 24px 20px;
+            text-align: center;
             font-size: 13px;
             color: var(--muted);
-            border-top: 1px solid var(--border);
-            background: #0a0a0a;
-            opacity: 0;
-            animation: fadeUp 1s ease 4.4s forwards;
             position: relative;
             z-index: 1;
+            opacity: 0;
+            animation: fadeUp 1s ease 5.2s forwards;
         }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--primary); }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(12px); }
             to   { opacity: 1; transform: translateY(0); }
         }
-
-        .navbar, .hero, .footer, .ad-wrap { position: relative; z-index: 1; }
     </style>
 
     <script>
@@ -330,69 +559,225 @@
 </head>
 <body>
 
+<!-- Particles -->
 <div class="particles" id="particles"></div>
 
-<div class="navbar">සිංහල වල් කතා | Sinhala Wala Katha 2026</div>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <img src="logo.jpg" alt="Sinhala Wala Katha Logo" class="navbar-logo">
+    සිංහල වල් කතා | Sinhala Wala Katha 2026
+</nav>
 
-<!-- BEGIN AADS AD UNIT 2435358 -->
-<div class="ad-wrap">
-    <div id="frame" style="width:100%;margin:auto;position:relative;z-index:99998;">
-        <iframe data-aa='2435358' src='//acceptable.a-ads.com/2435358/?size=Adaptive'
-            style='border:0;padding:0;width:70%;height:auto;overflow:hidden;display:block;margin:auto'></iframe>
-    </div>
-</div>
-<!-- END AADS AD UNIT 2435358 -->
-
-<div class="hero">
-    <h1 id="h1Text">Sinhala Wala Katha - සිංහල වල් කතා 2026</h1>
-    <p class="subtitle">
-        ශ්‍රී ලංකාවේ විශාලතම <strong style="color:var(--primary)">Sinhala Wala Katha</strong> platform | 
-        Best <strong style="color:var(--primary)">Wala Katha</strong> for Sri Lankans Worldwide 🇱🇰
-    </p>
-
-    <div class="info-box">
-        <span id="typedInfo"></span><span class="type-cursor" id="typeCursor"></span>
-    </div>
-
-    <div class="btn-wrap">
-        <a href="https://www.xn--3zc2b5bl5c6a.com/" class="main-btn" id="mainBtn" rel="bookmark">
-            සියලුම Wala Katha කියවන්න
-            <span class="btn-arrow">→</span>
-        </a>
-    </div>
+<!-- TOP BANNER AD 728x90 -->
+<div class="top-banner-ad">
+    <script>
+        atOptions = {
+            'key' : 'a60e887a8adb54a9ec0ed5b854553174',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+        };
+    </script>
+    <script src="https://www.highperformanceformat.com/a60e887a8adb54a9ec0ed5b854553174/invoke.js"></script>
 </div>
 
-<div class="footer">
+<!-- PAGE WRAP -->
+<div class="page-wrap">
+
+    <!-- HERO -->
+    <header class="hero">
+        <h1 id="h1Text">Sinhala Wala Katha - සිංහල වල් කතා 2026</h1>
+        <p class="hero-sub">
+            ශ්‍රී ලංකාවේ විශාලතම <strong style="color:var(--primary)">Sinhala Wala Katha</strong> platform |
+            Best <strong style="color:var(--primary)">Wala Katha</strong> for Sri Lankans Worldwide 🇱🇰
+        </p>
+    </header>
+
+    <!-- CONTENT GRID -->
+    <div class="content-grid">
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <article class="main-card">
+
+                <!-- INFO BOX TYPEWRITER -->
+                <div class="info-box">
+                    <span id="typedInfo"></span><span class="type-cursor" id="typeCursor"></span>
+                </div>
+
+                <!-- FEATURES -->
+                <div class="features">
+                    <div class="feature-item">
+                        <span class="feature-icon">📚</span>
+                        Daily Updates
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📱</span>
+                        Mobile Friendly
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🆓</span>
+                        නොමිලේ | Free
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🌍</span>
+                        Worldwide
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span>
+                        Fast Loading
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🔒</span>
+                        HTTPS Secure
+                    </div>
+                </div>
+
+                <!-- CTA BUTTON -->
+                <div class="btn-wrap">
+                    <a href="https://www.xn--3zc2b5bl5c6a.com/" class="main-btn" id="mainBtn" rel="bookmark">
+                        සියලුම Wala Katha කියවන්න
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+
+                <!-- NATIVE AD -->
+                <div class="native-ad-wrap">
+                    <script async="async" data-cfasync="false" src="https://pl29242277.profitablecpmratenetwork.com/1fffa2834a510a67bcca3c280f05de6d/invoke.js"></script>
+                    <div id="container-1fffa2834a510a67bcca3c280f05de6d"></div>
+                </div>
+
+                <!-- FAQ SECTION -->
+                <section class="faq-section">
+                    <h2 class="faq-title">❓ නිතර අසන ප්‍රශ්න | FAQ</h2>
+
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">
+                            Sinhala Wala Katha කියවන්නේ කොහෙන්ද?
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-a">
+                            හොඳම Sinhala Wala Katha මෙම වෙබ් අඩවියෙන් නොමිලේ කියවිය හැකිය. දිනපතා අලුත් Wala Katha, Amma Katha සහ Romantic Katha update වේ.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">
+                            Best Sinhala Wala Katha site එක කුමක්ද?
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-a">
+                            sinhala-wala-katha.github.io ශ්‍රී ලංකාවේ විශාලතම සහ හොඳම Sinhala Wala Katha platform එකයි. Mobile friendly, fast loading සහ daily updates සහිතව ලොව පුරා ප්‍රවේශ විය හැකිය.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">
+                            Sinhala Amma Katha online කියවිය හැකිද?
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-a">
+                            ඔව්! Sinhala Amma Katha, Wala Katha සහ Romantic Katha සියල්ල නොමිලේ online කියවිය හැකිය. Daily updates සහිතව ලොව ඕනෑම රටකින් access කළ හැකිය.
+                        </div>
+                    </div>
+                </section>
+
+            </article>
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <!-- KEYWORDS TAG CLOUD -->
+            <div class="sidebar-card">
+                <div class="sidebar-title">🔍 Popular Keywords</div>
+                <div class="tag-cloud">
+                    <span class="tag">Sinhala Wala Katha</span>
+                    <span class="tag">Wala Katha 2026</span>
+                    <span class="tag">Amma Katha</span>
+                    <span class="tag">Wal Katha</span>
+                    <span class="tag">සිංහල කතා</span>
+                    <span class="tag">Romantic Katha</span>
+                    <span class="tag">Lankan Stories</span>
+                    <span class="tag">Sinhala Stories</span>
+                </div>
+            </div>
+
+            <!-- SITE STATS -->
+            <div class="sidebar-card">
+                <div class="sidebar-title">📊 Site Info</div>
+                <ul class="stats-list">
+                    <li>Updates <span class="val">Daily ✅</span></li>
+                    <li>Language <span class="val">සිංහල / EN</span></li>
+                    <li>Access <span class="val">Worldwide 🌍</span></li>
+                    <li>Device <span class="val">All 📱💻</span></li>
+                    <li>Price <span class="val">Free 🆓</span></li>
+                </ul>
+            </div>
+
+            <!-- SIDEBAR AD 300x250 -->
+            <div class="sidebar-card" style="padding:10px;text-align:center;">
+                <script>
+                    atOptions = {
+                        'key' : '8123406b99039e7ca496d92018b413ba',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script src="https://www.highperformanceformat.com/8123406b99039e7ca496d92018b413ba/invoke.js"></script>
+            </div>
+
+        </aside>
+    </div>
+
+    <!-- BOTTOM AD 300x250 mobile -->
+    <div class="bottom-ad-wrap">
+        <script>
+            atOptions = {
+                'key' : '8123406b99039e7ca496d92018b413ba',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/8123406b99039e7ca496d92018b413ba/invoke.js"></script>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-links">
+        <a href="https://sinhala-wala-katha.github.io/">Home</a>
+        <a href="https://sinhala-wala-katha.github.io/sitemap.xml">Sitemap</a>
+        <a href="https://sinhala-wala-katha.github.io/robots.txt">Robots</a>
+        <a href="mailto:walkatha.com@gmail.com">Contact</a>
+    </div>
     &copy; 2026 Sinhala Wala Katha. All Rights Reserved.<br>
-    Sri Lanka's Best Wala Katha &amp; Sinhala Stories Platform — Worldwide Access 🌍
-
-    <!-- BEGIN AADS AD UNIT 2435358 -->
-    <div class="ad-wrap" style="margin-top:14px;">
-        <div id="frame2" style="width:100%;margin:auto;position:relative;z-index:99998;">
-            <iframe data-aa='2435358' src='//acceptable.a-ads.com/2435358/?size=Adaptive'
-                style='border:0;padding:0;width:70%;height:auto;overflow:hidden;display:block;margin:auto'></iframe>
-        </div>
-    </div>
-    <!-- END AADS AD UNIT 2435358 -->
-</div>
+    Sri Lanka's Best <strong style="color:var(--primary)">Wala Katha</strong> &amp; Sinhala Stories Platform — Worldwide Access 🌍
+</footer>
 
 <script>
     // Particles
     const container = document.getElementById('particles');
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 18; i++) {
         const p = document.createElement('div');
         p.classList.add('particle');
-        const size = 4 + Math.random() * 8;
-        p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;animation-duration:${7+Math.random()*10}s;animation-delay:${Math.random()*8}s`;
+        const size = 4 + Math.random() * 9;
+        p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;animation-duration:${7+Math.random()*12}s;animation-delay:${Math.random()*8}s`;
         container.appendChild(p);
     }
 
     // H1 cursor remove
     const h1El = document.getElementById('h1Text');
-    setTimeout(() => { h1El.classList.add('done'); }, 3100);
+    setTimeout(() => { h1El.classList.add('done'); }, 3200);
 
-    // Typewriter info box
-    const infoText = "අපගේ Sinhala Wala Katha platform එකේ අලුත්ම වල් කතා, අම්මා කතා (Amma Katha) සහ Romantic කතා සියල්ල දැන් නොමිලේ කියවිය හැකිය. Daily updates — දිනපතා අලුත් Wala Katha සඳහා පහත බොත්තම click කරන්න! 🇱🇰";
+    // Typewriter
+    const infoText = "අපගේ Sinhala Wala Katha platform එකේ අලුත්ම වල් කතා, අම්මා කතා (Amma Katha) සහ Romantic කතා සියල්ල දැන් නොමිලේ කියවිය හැකිය. Daily updates — දිනපතා අලුත් Wala Katha සඳහා පහත button click කරන්න! 🇱🇰";
     const typedEl = document.getElementById('typedInfo');
     const cursor  = document.getElementById('typeCursor');
     let idx = 0;
@@ -405,20 +790,27 @@
                 cursor.classList.add('hide');
                 document.getElementById('mainBtn').classList.add('pulse');
             }
-        }, 30);
-    }, 3400);
+        }, 28);
+    }, 3500);
 
     // Button ripple
     const btn = document.getElementById('mainBtn');
     btn.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
+        const r = document.createElement('span');
+        r.classList.add('ripple');
         const rect = btn.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
-        ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
-        btn.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 560);
+        r.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
+        btn.appendChild(r);
+        setTimeout(() => r.remove(), 560);
     });
+
+    // FAQ toggle
+    function toggleFaq(el) {
+        el.classList.toggle('open');
+        const ans = el.nextElementSibling;
+        ans.classList.toggle('open');
+    }
 </script>
 
 </body>

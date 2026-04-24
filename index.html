@@ -63,7 +63,7 @@
     }
     </script>
 
-    <!-- FAQ Schema — Google Featured Snippet -->
+    <!-- FAQ Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -82,7 +82,7 @@
           "name": "Best Sinhala Wala Katha site එක කුමක්ද?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "sinhala-wala-katha.github.io ශ්‍රී ලංකාවේ විශාලතම සහ හොඳම Sinhala Wala Katha platform එකයි. Mobile friendly, fast loading සහ daily updates සහිතව ලොව පුරා ප්‍රවේශ විය හැකිය."
+            "text": "sinhala-wala-katha.github.io ශ්‍රී ලංකාවේ විශාලතම සහ හොඳම Sinhala Wala Katha platform එකයි."
           }
         },
         {
@@ -111,7 +111,6 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -164,8 +163,8 @@
             justify-content: center;
             gap: 10px;
             letter-spacing: 0.5px;
-            opacity: 0;
-            animation: fadeDown 0.6s ease 0.1s forwards;
+            animation: fadeDown 0.6s ease forwards;
+            overflow: hidden;
         }
         .navbar-logo {
             width: 32px;
@@ -173,6 +172,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--primary);
+            flex-shrink: 0;
         }
         @keyframes fadeDown {
             from { opacity: 0; transform: translateY(-8px); }
@@ -213,39 +213,49 @@
             .sidebar { display: none; }
         }
 
-        /* ===== HERO ===== */
+        /* ===== HERO =====
+         * FIX: Removed white-space:nowrap + width:0→100% typing animation on h1.
+         * That caused the entire page to resize horizontally during animation.
+         * Replaced with a simple fadeIn + decorative blinking cursor via ::after.
+         */
         .hero {
             text-align: center;
             padding: 40px 20px 30px;
             position: relative;
             z-index: 1;
         }
-
         .hero h1 {
-            font-size: clamp(22px, 4.5vw, 34px);
+            font-size: clamp(20px, 4.5vw, 34px);
             color: var(--primary);
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid var(--primary);
-            width: 0;
             text-shadow: 0 0 25px rgba(229,57,53,0.4);
-            animation: typingH1 2.8s steps(45) 0.3s forwards, blinkH1 0.7s step-end infinite;
+            white-space: normal;
+            word-break: break-word;
+            opacity: 0;
+            animation: fadeInH1 0.6s ease 0.3s forwards;
         }
-        .hero h1.done {
-            border-right: 3px solid transparent;
-            animation: none;
-            width: 100%;
+        @keyframes fadeInH1 {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-        @keyframes typingH1 { from { width: 0; } to { width: 100%; } }
-        @keyframes blinkH1  { 50% { border-color: transparent; } }
+        /* Decorative cursor — blinks 6 times then disappears */
+        .h1-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: var(--primary);
+            margin-left: 4px;
+            vertical-align: middle;
+            animation: blinkH1 0.7s step-end 6;
+            animation-delay: 0.3s;
+        }
+        @keyframes blinkH1 { 50% { opacity: 0; } }
 
         .hero-sub {
             color: var(--muted);
             font-size: 16px;
             margin-top: 14px;
             opacity: 0;
-            animation: fadeUp 0.8s ease 3.2s forwards;
+            animation: fadeUp 0.8s ease 1s forwards;
         }
 
         /* ===== MAIN CARD ===== */
@@ -256,10 +266,12 @@
             padding: 28px 24px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.6);
             opacity: 0;
-            animation: fadeUp 0.8s ease 3.4s forwards;
+            animation: fadeUp 0.8s ease 1.2s forwards;
         }
 
-        /* ===== INFO BOX ===== */
+        /* ===== INFO BOX =====
+         * FIX: min-height reserves space so card doesn't jump as text types in.
+         */
         .info-box {
             background: var(--card2);
             border-left: 4px solid var(--primary);
@@ -268,7 +280,7 @@
             font-size: 16px;
             color: #cccccc;
             margin-bottom: 24px;
-            min-height: 60px;
+            min-height: 100px;
             text-align: left;
         }
         .type-cursor {
@@ -286,7 +298,7 @@
         /* ===== FEATURES GRID ===== */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
             gap: 12px;
             margin-bottom: 24px;
         }
@@ -300,30 +312,27 @@
             color: var(--muted);
             opacity: 0;
             animation: fadeUp 0.6s ease forwards;
+            transition: border-color 0.2s, color 0.2s, transform 0.2s;
         }
-        .feature-item:nth-child(1) { animation-delay: 3.6s; }
-        .feature-item:nth-child(2) { animation-delay: 3.7s; }
-        .feature-item:nth-child(3) { animation-delay: 3.8s; }
-        .feature-item:nth-child(4) { animation-delay: 3.9s; }
-        .feature-item:nth-child(5) { animation-delay: 4.0s; }
-        .feature-item:nth-child(6) { animation-delay: 4.1s; }
-        .feature-icon {
-            font-size: 26px;
-            display: block;
-            margin-bottom: 6px;
-        }
+        /* Reduced delays so content appears quickly */
+        .feature-item:nth-child(1) { animation-delay: 1.4s; }
+        .feature-item:nth-child(2) { animation-delay: 1.5s; }
+        .feature-item:nth-child(3) { animation-delay: 1.6s; }
+        .feature-item:nth-child(4) { animation-delay: 1.7s; }
+        .feature-item:nth-child(5) { animation-delay: 1.8s; }
+        .feature-item:nth-child(6) { animation-delay: 1.9s; }
+        .feature-icon { font-size: 26px; display: block; margin-bottom: 6px; }
         .feature-item:hover {
             border-color: var(--primary);
             color: var(--text);
             transform: translateY(-3px);
-            transition: 0.2s;
         }
 
         /* ===== BUTTON ===== */
         .btn-wrap {
             text-align: center;
             opacity: 0;
-            animation: popIn 0.7s cubic-bezier(0.175,0.885,0.32,1.275) 4.2s forwards;
+            animation: popIn 0.7s cubic-bezier(0.175,0.885,0.32,1.275) 2.1s forwards;
         }
         @keyframes popIn {
             0%   { opacity: 0; transform: scale(0.5); }
@@ -334,21 +343,23 @@
         .main-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: #ffffff;
-            padding: 16px 42px;
+            padding: 16px 36px;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 20px;
+            font-size: clamp(15px, 4vw, 20px);
             font-weight: bold;
             position: relative;
             overflow: hidden;
             transition: transform 0.15s ease, box-shadow 0.2s ease;
+            max-width: 100%;
+            white-space: normal;
+            text-align: center;
         }
-        .main-btn.pulse {
-            animation: glow 2s ease-in-out infinite;
-        }
+        .main-btn.pulse { animation: glow 2s ease-in-out infinite; }
         @keyframes glow {
             0%,100% { box-shadow: 0 0 12px rgba(229,57,53,0.4); }
             50%      { box-shadow: 0 0 28px rgba(229,57,53,0.8), 0 0 50px rgba(229,57,53,0.3); }
@@ -356,6 +367,7 @@
         .btn-arrow {
             display: inline-block;
             animation: arrowBounce 1s ease-in-out infinite;
+            flex-shrink: 0;
         }
         @keyframes arrowBounce {
             0%,100% { transform: translateX(0); }
@@ -373,20 +385,20 @@
         .main-btn:hover { transform: scale(1.05); }
         .main-btn:active { transform: scale(0.93) !important; }
 
-        /* ===== NATIVE AD WRAP ===== */
+        /* ===== NATIVE AD ===== */
         .native-ad-wrap {
             margin: 24px 0;
             border-radius: 10px;
             overflow: hidden;
             opacity: 0;
-            animation: fadeUp 1s ease 4.5s forwards;
+            animation: fadeUp 1s ease 2.4s forwards;
         }
 
-        /* ===== FAQ SECTION ===== */
+        /* ===== FAQ ===== */
         .faq-section {
             margin-top: 28px;
             opacity: 0;
-            animation: fadeUp 0.8s ease 4.6s forwards;
+            animation: fadeUp 0.8s ease 2.5s forwards;
         }
         .faq-title {
             font-size: 18px;
@@ -412,12 +424,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
             transition: background 0.2s;
         }
         .faq-q:hover { background: rgba(229,57,53,0.08); }
         .faq-q .faq-icon {
             color: var(--primary);
             font-size: 18px;
+            flex-shrink: 0;
             transition: transform 0.3s;
         }
         .faq-q.open .faq-icon { transform: rotate(45deg); }
@@ -429,16 +443,10 @@
             color: #bbbbbb;
             padding: 0 18px;
         }
-        .faq-a.open {
-            max-height: 200px;
-            padding: 0 18px 14px;
-        }
+        .faq-a.open { max-height: 200px; padding: 0 18px 14px; }
 
         /* ===== SIDEBAR ===== */
-        .sidebar {
-            position: relative;
-            z-index: 1;
-        }
+        .sidebar { position: relative; z-index: 1; }
         .sidebar-card {
             background: var(--card);
             border: 1px solid var(--border);
@@ -447,7 +455,7 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.4);
             opacity: 0;
-            animation: fadeUp 0.8s ease 3.8s forwards;
+            animation: fadeUp 0.8s ease 1.6s forwards;
         }
         .sidebar-title {
             font-size: 14px;
@@ -457,11 +465,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        .tag-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 7px; }
         .tag {
             background: var(--card2);
             border: 1px solid var(--border);
@@ -470,15 +474,10 @@
             padding: 4px 10px;
             border-radius: 20px;
             cursor: default;
-            transition: 0.2s;
+            transition: border-color 0.2s, color 0.2s;
         }
-        .tag:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        .stats-list {
-            list-style: none;
-        }
+        .tag:hover { border-color: var(--primary); color: var(--primary); }
+        .stats-list { list-style: none; }
         .stats-list li {
             display: flex;
             justify-content: space-between;
@@ -488,12 +487,13 @@
             color: var(--muted);
         }
         .stats-list li:last-child { border: none; }
-        .stats-list span.val {
-            color: var(--primary);
-            font-weight: bold;
-        }
+        .stats-list span.val { color: var(--primary); font-weight: bold; }
 
-        /* ===== TOP BANNER AD ===== */
+        /* ===== TOP BANNER AD =====
+         * FIX: overflow:hidden clips the 728px iframe on narrow screens.
+         * The ad network's iframe may still be 728px internally but won't
+         * push the page wider.
+         */
         .top-banner-ad {
             background: var(--card2);
             text-align: center;
@@ -502,8 +502,7 @@
             position: relative;
             z-index: 1;
             overflow: hidden;
-            opacity: 0;
-            animation: fadeDown 0.8s ease 0.5s forwards;
+            animation: fadeDown 0.8s ease 0.5s both;
         }
 
         /* ===== BOTTOM AD ===== */
@@ -512,8 +511,9 @@
             padding: 16px 0;
             position: relative;
             z-index: 1;
+            overflow: hidden;
             opacity: 0;
-            animation: fadeUp 1s ease 5s forwards;
+            animation: fadeUp 1s ease 2.8s forwards;
         }
 
         /* ===== FOOTER ===== */
@@ -527,7 +527,7 @@
             position: relative;
             z-index: 1;
             opacity: 0;
-            animation: fadeUp 1s ease 5.2s forwards;
+            animation: fadeUp 1s ease 3s forwards;
         }
         .footer-links {
             display: flex;
@@ -559,82 +559,49 @@
 </head>
 <body>
 
-<!-- Particles -->
 <div class="particles" id="particles"></div>
 
-<!-- NAVBAR -->
 <nav class="navbar">
     <img src="logo.jpg" alt="Sinhala Wala Katha Logo" class="navbar-logo">
     සිංහල වල් කතා | Sinhala Wala Katha 2026
 </nav>
 
-<!-- TOP BANNER AD 728x90 -->
+<!-- TOP BANNER AD -->
 <div class="top-banner-ad">
     <script>
-        atOptions = {
-            'key' : 'a60e887a8adb54a9ec0ed5b854553174',
-            'format' : 'iframe',
-            'height' : 90,
-            'width' : 728,
-            'params' : {}
-        };
+        atOptions = {'key':'a60e887a8adb54a9ec0ed5b854553174','format':'iframe','height':90,'width':728,'params':{}};
     </script>
     <script src="https://www.highperformanceformat.com/a60e887a8adb54a9ec0ed5b854553174/invoke.js"></script>
 </div>
 
-<!-- PAGE WRAP -->
 <div class="page-wrap">
 
-    <!-- HERO -->
     <header class="hero">
-        <h1 id="h1Text">Sinhala Wala Katha - සිංහල වල් කතා 2026</h1>
+        <h1>Sinhala Wala Katha - සිංහල වල් කතා 2026<span class="h1-cursor"></span></h1>
         <p class="hero-sub">
             ශ්‍රී ලංකාවේ විශාලතම <strong style="color:var(--primary)">Sinhala Wala Katha</strong> platform |
             Best <strong style="color:var(--primary)">Wala Katha</strong> for Sri Lankans Worldwide 🇱🇰
         </p>
     </header>
 
-    <!-- CONTENT GRID -->
     <div class="content-grid">
 
-        <!-- MAIN CONTENT -->
         <main>
             <article class="main-card">
 
-                <!-- INFO BOX TYPEWRITER -->
                 <div class="info-box">
                     <span id="typedInfo"></span><span class="type-cursor" id="typeCursor"></span>
                 </div>
 
-                <!-- FEATURES -->
                 <div class="features">
-                    <div class="feature-item">
-                        <span class="feature-icon">📚</span>
-                        Daily Updates
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">📱</span>
-                        Mobile Friendly
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🆓</span>
-                        නොමිලේ | Free
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🌍</span>
-                        Worldwide
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">⚡</span>
-                        Fast Loading
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🔒</span>
-                        HTTPS Secure
-                    </div>
+                    <div class="feature-item"><span class="feature-icon">📚</span>Daily Updates</div>
+                    <div class="feature-item"><span class="feature-icon">📱</span>Mobile Friendly</div>
+                    <div class="feature-item"><span class="feature-icon">🆓</span>නොමිලේ | Free</div>
+                    <div class="feature-item"><span class="feature-icon">🌍</span>Worldwide</div>
+                    <div class="feature-item"><span class="feature-icon">⚡</span>Fast Loading</div>
+                    <div class="feature-item"><span class="feature-icon">🔒</span>HTTPS Secure</div>
                 </div>
 
-                <!-- CTA BUTTON -->
                 <div class="btn-wrap">
                     <a href="https://www.xn--3zc2b5bl5c6a.com/" class="main-btn" id="mainBtn" rel="bookmark">
                         සියලුම Wala Katha කියවන්න
@@ -642,13 +609,11 @@
                     </a>
                 </div>
 
-                <!-- NATIVE AD -->
                 <div class="native-ad-wrap">
                     <script async="async" data-cfasync="false" src="https://pl29242277.profitablecpmratenetwork.com/1fffa2834a510a67bcca3c280f05de6d/invoke.js"></script>
                     <div id="container-1fffa2834a510a67bcca3c280f05de6d"></div>
                 </div>
 
-                <!-- FAQ SECTION -->
                 <section class="faq-section">
                     <h2 class="faq-title">❓ නිතර අසන ප්‍රශ්න | FAQ</h2>
 
@@ -657,9 +622,7 @@
                             Sinhala Wala Katha කියවන්නේ කොහෙන්ද?
                             <span class="faq-icon">+</span>
                         </div>
-                        <div class="faq-a">
-                            හොඳම Sinhala Wala Katha මෙම වෙබ් අඩවියෙන් නොමිලේ කියවිය හැකිය. දිනපතා අලුත් Wala Katha, Amma Katha සහ Romantic Katha update වේ.
-                        </div>
+                        <div class="faq-a">හොඳම Sinhala Wala Katha මෙම වෙබ් අඩවියෙන් නොමිලේ කියවිය හැකිය. දිනපතා අලුත් Wala Katha, Amma Katha සහ Romantic Katha update වේ.</div>
                     </div>
 
                     <div class="faq-item">
@@ -667,9 +630,7 @@
                             Best Sinhala Wala Katha site එක කුමක්ද?
                             <span class="faq-icon">+</span>
                         </div>
-                        <div class="faq-a">
-                            sinhala-wala-katha.github.io ශ්‍රී ලංකාවේ විශාලතම සහ හොඳම Sinhala Wala Katha platform එකයි. Mobile friendly, fast loading සහ daily updates සහිතව ලොව පුරා ප්‍රවේශ විය හැකිය.
-                        </div>
+                        <div class="faq-a">sinhala-wala-katha.github.io ශ්‍රී ලංකාවේ විශාලතම සහ හොඳම Sinhala Wala Katha platform එකයි. Mobile friendly, fast loading සහ daily updates සහිතව ලොව පුරා ප්‍රවේශ විය හැකිය.</div>
                     </div>
 
                     <div class="faq-item">
@@ -677,19 +638,14 @@
                             Sinhala Amma Katha online කියවිය හැකිද?
                             <span class="faq-icon">+</span>
                         </div>
-                        <div class="faq-a">
-                            ඔව්! Sinhala Amma Katha, Wala Katha සහ Romantic Katha සියල්ල නොමිලේ online කියවිය හැකිය. Daily updates සහිතව ලොව ඕනෑම රටකින් access කළ හැකිය.
-                        </div>
+                        <div class="faq-a">ඔව්! Sinhala Amma Katha, Wala Katha සහ Romantic Katha සියල්ල නොමිලේ online කියවිය හැකිය. Daily updates සහිතව ලොව ඕනෑම රටකින් access කළ හැකිය.</div>
                     </div>
                 </section>
 
             </article>
         </main>
 
-        <!-- SIDEBAR -->
         <aside class="sidebar">
-
-            <!-- KEYWORDS TAG CLOUD -->
             <div class="sidebar-card">
                 <div class="sidebar-title">🔍 Popular Keywords</div>
                 <div class="tag-cloud">
@@ -704,7 +660,6 @@
                 </div>
             </div>
 
-            <!-- SITE STATS -->
             <div class="sidebar-card">
                 <div class="sidebar-title">📊 Site Info</div>
                 <ul class="stats-list">
@@ -716,40 +671,24 @@
                 </ul>
             </div>
 
-            <!-- SIDEBAR AD 300x250 -->
             <div class="sidebar-card" style="padding:10px;text-align:center;">
                 <script>
-                    atOptions = {
-                        'key' : '8123406b99039e7ca496d92018b413ba',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
+                    atOptions = {'key':'8123406b99039e7ca496d92018b413ba','format':'iframe','height':250,'width':300,'params':{}};
                 </script>
                 <script src="https://www.highperformanceformat.com/8123406b99039e7ca496d92018b413ba/invoke.js"></script>
             </div>
-
         </aside>
     </div>
 
-    <!-- BOTTOM AD 300x250 mobile -->
     <div class="bottom-ad-wrap">
         <script>
-            atOptions = {
-                'key' : '8123406b99039e7ca496d92018b413ba',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
+            atOptions = {'key':'8123406b99039e7ca496d92018b413ba','format':'iframe','height':250,'width':300,'params':{}};
         </script>
         <script src="https://www.highperformanceformat.com/8123406b99039e7ca496d92018b413ba/invoke.js"></script>
     </div>
 
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
     <div class="footer-links">
         <a href="https://sinhala-wala-katha.github.io/">Home</a>
@@ -772,26 +711,28 @@
         container.appendChild(p);
     }
 
-    // H1 cursor remove
-    const h1El = document.getElementById('h1Text');
-    setTimeout(() => { h1El.classList.add('done'); }, 3200);
-
-    // Typewriter
+    /*
+     * TYPEWRITER
+     * - Starts at 1.4s (not 3.5s) so user sees content quickly
+     * - Uses [...spread] to correctly handle multi-byte Sinhala Unicode chars
+     */
     const infoText = "අපගේ Sinhala Wala Katha platform එකේ අලුත්ම වල් කතා, අම්මා කතා (Amma Katha) සහ Romantic කතා සියල්ල දැන් නොමිලේ කියවිය හැකිය. Daily updates — දිනපතා අලුත් Wala Katha සඳහා පහත button click කරන්න! 🇱🇰";
+    const chars   = [...infoText];
     const typedEl = document.getElementById('typedInfo');
     const cursor  = document.getElementById('typeCursor');
     let idx = 0;
+
     setTimeout(() => {
         const timer = setInterval(() => {
-            if (idx < infoText.length) {
-                typedEl.textContent += infoText[idx++];
+            if (idx < chars.length) {
+                typedEl.textContent += chars[idx++];
             } else {
                 clearInterval(timer);
                 cursor.classList.add('hide');
                 document.getElementById('mainBtn').classList.add('pulse');
             }
         }, 28);
-    }, 3500);
+    }, 1400);
 
     // Button ripple
     const btn = document.getElementById('mainBtn');
@@ -808,8 +749,7 @@
     // FAQ toggle
     function toggleFaq(el) {
         el.classList.toggle('open');
-        const ans = el.nextElementSibling;
-        ans.classList.toggle('open');
+        el.nextElementSibling.classList.toggle('open');
     }
 </script>
 

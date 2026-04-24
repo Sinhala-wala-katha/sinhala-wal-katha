@@ -1,0 +1,7 @@
+Contact: mailto:walkatha.com@gmail.com
+Expires: 2027-04-23T00:00:00.000Z
+Preferred-Languages: si, en
+Canonical: https://sinhala-wala-katha.github.io/security.txt
+Policy: https://sinhala-wala-katha.github.io/
+Acknowledgments: https://sinhala-wala-katha.github.io/
+Scope: https://sinhala-wala-katha.github.io/

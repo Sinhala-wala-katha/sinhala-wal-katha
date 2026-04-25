@@ -1,4 +1,4 @@
-name: Generate SEO Files
+name: sitemap-and-robot-auto (static)
 
 on:
   push:

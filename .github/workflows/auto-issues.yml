@@ -179,7 +179,8 @@ jobs:
             git push
           fi
 
-      # ✅ BUG 2 FIX: --exclude args quotes නැතිව, inline single string format
+      # ✅ ROOT FIX: continue-on-error REMOVE කළා — fail: false පමණ ඇති විට
+      #    lychee broken links සොයාගෙන exit 2 දුන්නත් workflow continue වේ
       - name: 🔗 Scan Links with Lychee
         uses: lycheeverse/lychee-action@v2
         id: lychee
@@ -187,7 +188,6 @@ jobs:
           steps.new_content.outputs.is_new_content == 'true' ||
           steps.run_mode.outputs.mode == 'weekly_full' ||
           steps.run_mode.outputs.mode == 'manual'
-        continue-on-error: true
         with:
           args: "--verbose --no-progress --accept 200,201,301,302,403,429 --exclude-mail --exclude ^mailto: --exclude ^tel: --exclude ^javascript: --timeout 20 --max-retries 3 ${{ env.SITE_URL }}"
           output: ./lychee/out.md
@@ -320,7 +320,6 @@ jobs:
             echo "ℹ️ No existing issue found."
           fi
 
-      # ✅ BUG 1 FIX: env: block දෙකක් → merge කර එකක් පමණයි
       - name: 🆕 Create or Update Issue
         if: |
           steps.new_content.outputs.is_new_content == 'true' ||
@@ -349,7 +348,6 @@ jobs:
             echo "✅ New issue created."
           fi
 
-      # ✅ BUG 1 FIX: env: block දෙකක් → merge කර එකක් පමණයි
       - name: 📅 Daily Title Date Update
         if: steps.run_mode.outputs.mode == 'daily_date'
         env:
